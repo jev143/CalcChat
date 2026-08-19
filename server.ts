@@ -129,7 +129,7 @@ function verifySessionToken(tokenString?: string): { uid: string; accountCode: s
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  const PORT = Number(process.env.PORT || 3000);
 
   // Basic in-memory abuse protection for local/single-instance deployments.
   // For production, put a real reverse-proxy/WAF rate limiter in front of this server.
