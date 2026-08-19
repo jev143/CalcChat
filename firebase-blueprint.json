@@ -1,0 +1,88 @@
+{
+  "entities": {
+    "UserAccount": {
+      "title": "UserAccount",
+      "description": "User parent account with stealth calculator PINs",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "accountCode": { "type": "string" },
+        "displayName": { "type": "string" },
+        "avatar": { "type": "string" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["uid", "accountCode"]
+    },
+    "ChatIdentity": {
+      "title": "ChatIdentity",
+      "description": "First or Second identity profile",
+      "type": "object",
+      "properties": {
+        "identityId": { "type": "string" },
+        "ownerUserId": { "type": "string" },
+        "type": { "type": "string" },
+        "displayName": { "type": "string" },
+        "username": { "type": "string" },
+        "avatar": { "type": "string" },
+        "pinHash": { "type": "string" }
+      },
+      "required": ["identityId", "ownerUserId", "type", "displayName", "pinHash"]
+    },
+    "Message": {
+      "title": "Message",
+      "description": "Rich chat message with attachments",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "conversationId": { "type": "string" },
+        "senderIdentityId": { "type": "string" },
+        "senderUid": { "type": "string" },
+        "type": { "type": "string" },
+        "text": { "type": "string" },
+        "fileUrl": { "type": "string" },
+        "fileName": { "type": "string" },
+        "fileSize": { "type": "number" },
+        "mimeType": { "type": "string" },
+        "storagePath": { "type": "string" },
+        "thumbnailUrl": { "type": "string" },
+        "audioDuration": { "type": "number" },
+        "createdAt": { "type": "number" },
+        "status": { "type": "string" }
+      },
+      "required": ["conversationId", "senderIdentityId", "type", "createdAt", "status"]
+    },
+    "Call": {
+      "title": "Call",
+      "description": "WebRTC voice/video call session",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "callerIdentityId": { "type": "string" },
+        "callerName": { "type": "string" },
+        "receiverIdentityId": { "type": "string" },
+        "callType": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["callerIdentityId", "receiverIdentityId", "callType", "status"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserAccount",
+      "description": "User master profile"
+    },
+    "/identities/{identityId}": {
+      "schema": "ChatIdentity",
+      "description": "Chat identity profiles"
+    },
+    "/conversations/{convId}/messages/{msgId}": {
+      "schema": "Message",
+      "description": "Conversation messages"
+    },
+    "/calls/{callId}": {
+      "schema": "Call",
+      "description": "Voice and video call signaling sessions"
+    }
+  }
+}

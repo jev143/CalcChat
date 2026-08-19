@@ -1,0 +1,15 @@
+CalcChat corrected build notes
+==============================
+1. Server loads project-root .env via dotenv/config.
+2. SESSION_SECRET is required and persistent; it is no longer regenerated on every restart.
+3. Authentication no longer falls back to a client-only Firestore session. Protected APIs use the HttpOnly server session.
+4. Auth cookies explicitly use path=/ and SameSite=lax for localhost development.
+5. Media upload keeps credentials enabled and returns clearer upload errors.
+6. Legacy conversations missing participantUids can resolve participant UIDs from participant identity records.
+7. Existing UI and project architecture were preserved; no redesign was introduced.
+
+Before running:
+- Copy .env.example to .env
+- Set SESSION_SECRET to a private 32+ character value
+- npm install
+- npm run dev

@@ -1,0 +1,54 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Users Collection
+    match /users/{userId} {
+      allow read, write: if true;
+    }
+
+    // Account Codes Registry
+    match /accountCodes/{code} {
+      allow read, create, update: if true;
+      allow delete: if false;
+    }
+
+    // Unique Username Registry
+    match /usernames/{username} {
+      allow read, write: if true;
+    }
+
+    // Identities Collection
+    match /identities/{identityId} {
+      allow read, write: if true;
+    }
+
+    // Contacts Collection
+    match /contacts/{contactId} {
+      allow read, write: if true;
+    }
+
+    // Conversations Collection and all subcollections (messages, typing)
+    match /conversations/{conversationId} {
+      allow read, write: if true;
+
+      match /{document=**} {
+        allow read, write: if true;
+      }
+    }
+
+    // Media metadata is server-owned in uploads/.metadata and is never stored in Firestore.
+    match /mediaFiles/{fileId} {
+      allow read, write: if false;
+    }
+
+    // WebRTC Calls Collection and candidates
+    match /calls/{callId} {
+      allow read, write: if true;
+      
+      match /{document=**} {
+        allow read, write: if true;
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "CalcChat",
+  "description": "Multi-user messaging application with a disguised calculator PIN entry, dual identities per account, and real-time Firestore chat.",
+  "requestFramePermissions": ["microphone", "camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
